@@ -19,7 +19,17 @@ mongoose
 
 app.use("/api/user", userRouter); // Mount the router on /api/user path
 
-app.use("/api/auth",authRouter)
+app.use("/api/auth",authRouter);
+
+app.use((err,req,res,next)=>{
+    const statusCode=err.statusCode || 501;
+    const message=err.message || "error in function";
+    return res.status(statusCode).json({
+        success:false,
+        statusCode,
+        message
+    })
+})
 
 app.listen(8000, () => {
   console.log("Server started on port 8000");
