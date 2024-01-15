@@ -1,16 +1,23 @@
+// index.js
 import express from "express";
-import mongoose  from "mongoose";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
-dotenv.config();
-const app=express();
+import userRouter from "./routes/userRouter.route.js"; // Import the correct router
 
-mongoose.connect(process.env.MONGO)
-.then(()=>{
-    console.log("database succesfully connected")
-})
-.catch((error)=>{
-    console.log("error datebase connection")
-})
-app.listen(4000,()=>{
-    console.log("server started on 4000")
-})
+dotenv.config();
+const app = express();
+
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => {
+    console.log("Database successfully connected");
+  })
+  .catch((error) => {
+    console.log("Error connecting to the database", error);
+  });
+
+app.use("/api/user", userRouter); // Mount the router on /api/user path
+
+app.listen(8000, () => {
+  console.log("Server started on port 8000");
+});
