@@ -31,7 +31,7 @@ app.use((err,req,res,next)=>{
     })
 })
 
-app.listen(8000, () => {
-  console.log("Server started on port 8000");
+app.listen(3000, () => {
+  console.log("Server started on port 3000");
 });
 
